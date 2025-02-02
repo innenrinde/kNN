@@ -1,24 +1,22 @@
-# table
+# kNN search for a list of objects
+http://knn.powerfullapp.ro
 
-## Project setup
+## Using kNN class
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+let kNN = new kNNSearch();
 ```
 
-### Compiles and minifies for production
+### Setting the k number
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+kNN.setK(number);
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Setting a keywords vector
+```
+kNN.setVector(phrase);
+```
+
+### Performing search for a list of objects with predefined columns
+```
+let results = kNN.applySearch(rows, columns);
+```
