@@ -1,22 +1,34 @@
 <template>
 	<div class="container">
 		<div class="header-bar">
-      Keywords =
-			<input
-        class="keywords"
-				type="text"
-				placeholder="type here a phrase and the Enter..."
-        v-model="query"
-        @keydown="onQueryEnter"
-			/>
-      <span>k =</span>
-      <input
-        class="knn"
-        type="text"
-        placeholder="define k number"
-        v-model="kNumber"
-        @keydown="onKNumberEnter"
-    />
+      <div>
+        Keywords =
+        <input
+          class="keywords"
+          type="text"
+          placeholder="type here a phrase and the Enter..."
+          v-model="query"
+          @keydown="onQueryEnter"
+        />
+      </div>
+      <div>
+        k =
+        <input
+          class="knn"
+          type="text"
+          placeholder="define k number"
+          v-model="kNumber"
+          @keydown="onKNumberEnter"
+        />
+      </div>
+      <div>
+        <input
+          class="button"
+          type="button"
+          value="Apply"
+          @click="clickApply"
+        />
+      </div>
 		</div>
 
 		<div class="table-section">
@@ -106,6 +118,12 @@ let onKNumberEnter = (event) => {
   }
 };
 
+let clickApply = () => {
+  kNN.setK(kNumber.value);
+  kNN.setVector(query.value);
+  applyResults();
+}
+
 </script>
 
 <style lang="scss">
@@ -118,9 +136,17 @@ let onKNumberEnter = (event) => {
 
 .header-bar {
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    margin: 0 5px 0 5px;
+  }
 
   input.keywords,
-  input.knn {
+  input.knn,
+  input.button {
     padding: 7px;
     border: solid 1px #c3c3c3;
     border-radius: 5px;
@@ -128,16 +154,30 @@ let onKNumberEnter = (event) => {
   }
 
   input.keywords {
-    width: 30%;
+    width: 300px;
   }
 
   input.knn {
     width: 50px;
   }
 
-  span {
-    display: inline-block;
-    margin: 0 5px 0 50px;
+  input.button {
+    margin-left: 3px;
+    cursor: pointer;
+  }
+
+  input.button:hover {
+    background-color: #f3f4f6;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-bar {
+    flex-direction: column;
+  }
+
+  .header-bar > div {
+    margin-bottom: 10px;
   }
 }
 

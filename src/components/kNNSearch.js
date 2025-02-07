@@ -75,6 +75,12 @@ export class kNNSearch {
         return sum;
     }
 
+    /**
+     * Perform search based on columns configurations
+     * @param {Array} rows
+     * @param {Array} columns
+     * @returns {[string, unknown]|*}
+     */
     applySearch(rows, columns) {
 
         // no need to perform a search for empty vector
@@ -90,7 +96,7 @@ export class kNNSearch {
             let distance = this.#rowDistance(row, columns);
 
             // hack to optimize results - exclude rows with no distance detected
-            if (distance%columns.length !== 0) {
+            if (distance % columns.length !== 0) {
                 hashTable[distance] = hashTable[distance] ?? [];
                 hashTable[distance].push(row);
                 founded ++;
